@@ -12,7 +12,7 @@ class DoubleArrayTest {
         double[] values = {1.0, 2.0, 3.0};
 
         //when
-        DoubleArray array = new DoubleArray(values);
+        DoubleArray array = new DoubleArray(1L, values);
 
         //then
         assertArrayEquals(values, array.getValues());
@@ -22,7 +22,7 @@ class DoubleArrayTest {
     void shouldReturnCopyOfArray() {
         //given
         double[] values = {1.0, 2.0, 3.0};
-        DoubleArray array = new DoubleArray(values);
+        DoubleArray array = new DoubleArray(1L, values);
 
         //when
         double[] result = array.getValues();
