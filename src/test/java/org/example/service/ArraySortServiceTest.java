@@ -15,7 +15,7 @@ class ArraySortServiceTest {
     void shouldSortArrayUsingInsertionSort() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{5.0, 1.0, 4.0, 2.0, 3.0});
+                new DoubleArray(1L, new double[]{5.0, 1.0, 4.0, 2.0, 3.0});
 
         //when
         double[] result = service.insertionSort(array);
@@ -31,7 +31,7 @@ class ArraySortServiceTest {
     void shouldSortArrayUsingQuickSort() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{5.0, 1.0, 4.0, 2.0, 3.0});
+                new DoubleArray(1L, new double[]{5.0, 1.0, 4.0, 2.0, 3.0});
 
         //when
         double[] result = service.quickSort(array);
@@ -47,7 +47,7 @@ class ArraySortServiceTest {
     void shouldSortAlreadySortedArrayUsingInsertion() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{1.0, 2.0, 3.0});
+                new DoubleArray(1L, new double[]{1.0, 2.0, 3.0});
 
         //when
         double[] result = service.insertionSort(array);
@@ -63,7 +63,7 @@ class ArraySortServiceTest {
     void shouldSortArrayWithNegativeNumbers() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{3.0, -1.0, 2.0, -5.0});
+                new DoubleArray(1L, new double[]{3.0, -1.0, 2.0, -5.0});
 
         //when
         double[] result = service.quickSort(array);
@@ -78,7 +78,7 @@ class ArraySortServiceTest {
     @Test
     void shouldSortEmptyArray() {
         //given
-        DoubleArray array = new DoubleArray(new double[]{});
+        DoubleArray array = new DoubleArray(1L, new double[]{});
 
         //when
         double[] result = service.insertionSort(array);

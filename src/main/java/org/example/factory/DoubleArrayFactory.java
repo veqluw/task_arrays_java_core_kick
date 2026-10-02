@@ -7,18 +7,24 @@ import org.example.parser.ArrayParser;
 
 public class DoubleArrayFactory implements ArrayFactory {
 
-    private final ArrayParser parser;
     private static final Logger LOGGER =
             LogManager.getLogger(DoubleArrayFactory.class);
+
+    private final ArrayParser parser;
 
     public DoubleArrayFactory(ArrayParser parser) {
         this.parser = parser;
     }
 
     @Override
-    public DoubleArray create(String data) {
-        LOGGER.debug("Creating DoubleArray from input data");
+    public DoubleArray create(long id, String data) {
+        LOGGER.debug(
+                "Creating DoubleArray with id={}",
+                id
+        );
+
         double[] values = parser.parse(data);
-        return new DoubleArray(values);
+
+        return new DoubleArray(id, values);
     }
 }

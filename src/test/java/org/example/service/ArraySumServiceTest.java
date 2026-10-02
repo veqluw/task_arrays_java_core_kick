@@ -18,7 +18,7 @@ class ArraySumServiceTest {
     void shouldCalculateSum() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{1.0, 2.0, 3.0});
+                new DoubleArray(1L, new double[]{1.0, 2.0, 3.0});
 
         //when
         OptionalDouble result = service.calculateSum(array);
@@ -31,7 +31,7 @@ class ArraySumServiceTest {
     void shouldCalculateSumForNegativeNumbers() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{-1.0, -2.0, -3.0});
+                new DoubleArray(1L, new double[]{-1.0, -2.0, -3.0});
 
         //when
         OptionalDouble result = service.calculateSum(array);
@@ -43,7 +43,7 @@ class ArraySumServiceTest {
     @Test
     void shouldReturnEmptyForEmptyArray() {
         //given
-        DoubleArray array = new DoubleArray(new double[]{});
+        DoubleArray array = new DoubleArray(1L, new double[]{});
 
         //when
         OptionalDouble result = service.calculateSum(array);

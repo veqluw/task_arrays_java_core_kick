@@ -18,7 +18,7 @@ class ArrayAverageServiceTest {
     void shouldCalculateAverage() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{2.0, 4.0, 6.0});
+                new DoubleArray(1L, new double[]{2.0, 4.0, 6.0});
 
         //when
         OptionalDouble result = service.calculateAverage(array);
@@ -31,7 +31,7 @@ class ArrayAverageServiceTest {
     void shouldCalculateAverageForFractionalResult() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{1.0, 2.0});
+                new DoubleArray(1L, new double[]{1.0, 2.0});
 
         //when
         OptionalDouble result = service.calculateAverage(array);
@@ -43,7 +43,7 @@ class ArrayAverageServiceTest {
     @Test
     void shouldReturnEmptyForEmptyArray() {
         //given
-        DoubleArray array = new DoubleArray(new double[]{});
+        DoubleArray array = new DoubleArray(1L, new double[]{});
 
         //when
         OptionalDouble result = service.calculateAverage(array);

@@ -20,7 +20,7 @@ public class DoubleArrayFactoryTest {
         String data = "1, 2, 3";
 
         //when
-        DoubleArray result = factory.create(data);
+        DoubleArray result = factory.create(1, data);
 
         //then
         assertArrayEquals(

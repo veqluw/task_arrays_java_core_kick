@@ -18,7 +18,7 @@ class ArrayMinMaxServiceTest {
     void shouldFindMinimumValue() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{5.0, 2.0, 8.0, 1.0});
+                new DoubleArray(1L, new double[]{5.0, 2.0, 8.0, 1.0});
 
         //when
         OptionalDouble result = service.findMin(array);
@@ -31,7 +31,7 @@ class ArrayMinMaxServiceTest {
     void shouldFindMaximumValue() {
         //given
         DoubleArray array =
-                new DoubleArray(new double[]{5.0, 2.0, 8.0, 1.0});
+                new DoubleArray(1L, new double[]{5.0, 2.0, 8.0, 1.0});
 
         //when
         OptionalDouble result = service.findMax(array);
@@ -43,7 +43,7 @@ class ArrayMinMaxServiceTest {
     @Test
     void shouldReturnEmptyForMinimumOfEmptyArray() {
         //given
-        DoubleArray array = new DoubleArray(new double[]{});
+        DoubleArray array = new DoubleArray(1L, new double[]{});
 
         //when
         OptionalDouble result = service.findMin(array);
@@ -55,7 +55,7 @@ class ArrayMinMaxServiceTest {
     @Test
     void shouldReturnEmptyForMaximumOfEmptyArray() {
         //given
-        DoubleArray array = new DoubleArray(new double[]{});
+        DoubleArray array = new DoubleArray(1L, new double[]{});
 
         //when
         OptionalDouble result = service.findMax(array);
