@@ -47,7 +47,7 @@ public class ArrayDataValidatorTest {
     }
 
     @Test
-    public void shouldAcceptEmptyString() {
+    public void shouldDeclineEmptyString() {
         //given
         String data = "";
 
@@ -55,7 +55,7 @@ public class ArrayDataValidatorTest {
         boolean result = validator.isValid(data);
 
         //then
-        assertTrue(result);
+        assertFalse(result);
     }
 
     @Test
