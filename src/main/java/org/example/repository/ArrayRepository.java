@@ -16,12 +16,14 @@ public interface ArrayRepository extends ArrayObservable {
 
     Optional<DoubleArray> findById(long id);
 
-    List<DoubleArray> find(Specification specification);
+    List<DoubleArray> find(Specification... specification);
 
     List<DoubleArray> findAll();
 
     List<DoubleArray> sort(Comparator<DoubleArray> comparator);
 
     void updateValue(long id, int index, double value);
+
+    void deleteById(long id);
 
 }

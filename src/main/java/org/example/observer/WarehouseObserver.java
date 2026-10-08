@@ -51,4 +51,13 @@ public class WarehouseObserver implements ArrayObserver {
                 array.getId()
         );
     }
+
+    @Override
+    public void delete(DoubleArray array) {
+        warehouse.remove(array.getId());
+        LOGGER.debug(
+                "Warehouse removed for array id={}",
+                array.getId()
+        );
+    }
 }

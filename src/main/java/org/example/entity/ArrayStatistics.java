@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import java.util.OptionalDouble;
+import java.util.function.DoubleConsumer;
 
 public class ArrayStatistics {
 
@@ -35,5 +36,14 @@ public class ArrayStatistics {
 
     public OptionalDouble getMax() {
         return max;
+    }
+
+    @Override
+    public String toString() {
+        return "Statistics:{" +
+                "sum: " + sum.getAsDouble() +
+                ", average: " + average.getAsDouble() +
+                ", min: " + min.getAsDouble() +
+                ", max: " + max.getAsDouble();
     }
 }

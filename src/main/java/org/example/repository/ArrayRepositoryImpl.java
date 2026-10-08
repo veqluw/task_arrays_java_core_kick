@@ -42,7 +42,7 @@ public class ArrayRepositoryImpl implements ArrayRepository {
                 array.getId()
         );
 
-        notifyObservers(array);
+        notifyObserversUpdate(array);
     }
 
     @Override
@@ -65,13 +65,7 @@ public class ArrayRepositoryImpl implements ArrayRepository {
 
         Optional<DoubleArray> result = findById(id);
 
-        if (result.isEmpty()) {
-            LOGGER.warn(
-                    "Array not found: id={}",
-                    id
-            );
-            return;
-        }
+        if (isNotExists(result, id)) return;
 
         DoubleArray array = result.get();
         array.setValue(index, value);
@@ -83,7 +77,7 @@ public class ArrayRepositoryImpl implements ArrayRepository {
                 value
         );
 
-        notifyObservers(array);
+        notifyObserversUpdate(array);
     }
 
     @Override
@@ -94,11 +88,33 @@ public class ArrayRepositoryImpl implements ArrayRepository {
     }
 
     @Override
+    public void deleteById(long id) {
+        Optional<DoubleArray> result = findById(id);
+
+        if(isNotExists(result, id)) return;
+
+        if (result.isPresent()) {
+            arrays.remove(result.get());
+            notifyObserversDelete(result.get());
+        }
+    }
+
+    @Override
     public List<DoubleArray> find(
-            Specification specification) {
+            Specification... specifications) {
+        if (specifications.length == 0) {
+            return arrays.stream().toList();
+        }
 
         return arrays.stream()
-                .filter(specification::isSatisfiedBy)
+                .filter(doubleArray -> {
+                    boolean isSatisfied = true;
+                    for (Specification specification : specifications) {
+                        isSatisfied = specification.isSatisfiedBy(doubleArray);
+                        if (!isSatisfied) return isSatisfied;
+                    }
+                    return isSatisfied;
+                })
                 .toList();
     }
 
@@ -130,9 +146,27 @@ public class ArrayRepositoryImpl implements ArrayRepository {
     }
 
     @Override
-    public void notifyObservers(DoubleArray array) {
+    public void notifyObserversUpdate(DoubleArray array) {
         for (ArrayObserver observer : observers) {
             observer.update(array);
         }
+    }
+
+    @Override
+    public void notifyObserversDelete(DoubleArray array) {
+        for (ArrayObserver observer : observers) {
+            observer.delete(array);
+        }
+    }
+
+    private boolean isNotExists(Optional<DoubleArray> array, long id) {
+        if (array.isEmpty()) {
+            LOGGER.warn(
+                    "Array not found: id={}",
+                    id
+            );
+            return true;
+        }
+        return false;
     }
 }

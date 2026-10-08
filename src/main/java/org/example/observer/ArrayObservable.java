@@ -8,5 +8,7 @@ public interface ArrayObservable {
 
     void removeObserver(ArrayObserver observer);
 
-    void notifyObservers(DoubleArray array);
+    void notifyObserversUpdate(DoubleArray array);
+
+    void notifyObserversDelete(DoubleArray array);
 }

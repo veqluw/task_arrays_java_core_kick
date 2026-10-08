@@ -15,7 +15,7 @@ public class ArrayDataValidator {
         boolean valid;
 
         if (data != null) {
-             valid = data.isBlank() || data.matches(DOUBLE_PATTERN);
+             valid = data.matches(DOUBLE_PATTERN);
         } else {
              valid = false;
         }
