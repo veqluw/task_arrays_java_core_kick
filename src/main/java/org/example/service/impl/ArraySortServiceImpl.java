@@ -14,7 +14,7 @@ public class ArraySortServiceImpl implements ArraySortService {
     public double[] insertionSort(DoubleArray array) {
         LOGGER.debug("Starting insertion sort");
 
-        double[] values = array.getValues();
+        double[] values = array.values();
 
         if (values.length == 0) {
             return values;
@@ -40,7 +40,7 @@ public class ArraySortServiceImpl implements ArraySortService {
     public double[] quickSort(DoubleArray array) {
         LOGGER.debug("Starting quick sort");
 
-        double[] values = array.getValues();
+        double[] values = array.values();
         if (values.length == 0) {
             return values;
         }

@@ -39,7 +39,7 @@ public class ArrayRepositoryImpl implements ArrayRepository {
 
         LOGGER.info(
                 "Array added: id={}",
-                array.getId()
+                array.id()
         );
 
         notifyObserversUpdate(array);
@@ -52,7 +52,7 @@ public class ArrayRepositoryImpl implements ArrayRepository {
         if (removed) {
             LOGGER.info(
                     "Array removed: id={}",
-                    array.getId()
+                    array.id()
             );
         }
     }
@@ -78,13 +78,6 @@ public class ArrayRepositoryImpl implements ArrayRepository {
         );
 
         notifyObserversUpdate(array);
-    }
-
-    @Override
-    public Optional<DoubleArray> findById(long id) {
-        return arrays.stream()
-                .filter(array -> array.getId() == id)
-                .findFirst();
     }
 
     @Override
@@ -116,11 +109,6 @@ public class ArrayRepositoryImpl implements ArrayRepository {
                     return isSatisfied;
                 })
                 .toList();
-    }
-
-    @Override
-    public List<DoubleArray> findAll() {
-        return List.copyOf(arrays);
     }
 
     @Override
@@ -157,6 +145,12 @@ public class ArrayRepositoryImpl implements ArrayRepository {
         for (ArrayObserver observer : observers) {
             observer.delete(array);
         }
+    }
+
+    private Optional<DoubleArray> findById(long id) {
+        return arrays.stream()
+                .filter(array -> array.id() == id)
+                .findFirst();
     }
 
     private boolean isNotExists(Optional<DoubleArray> array, long id) {

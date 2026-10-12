@@ -12,7 +12,7 @@ public class ElementSpecification implements Specification {
 
     @Override
     public boolean isSatisfiedBy(DoubleArray array) {
-        double[] values = array.getValues();
+        double[] values = array.values();
 
         for (double value : values) {
             if (Double.compare(value, expectedValue) == 0) {

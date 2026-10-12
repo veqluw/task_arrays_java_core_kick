@@ -27,7 +27,7 @@ public class SumSpecification implements Specification {
     @Override
     public boolean isSatisfiedBy(DoubleArray array) {
         Optional<ArrayStatistics> statistics =
-                warehouse.findById(array.getId());
+                warehouse.findById(array.id());
 
         if (statistics.isEmpty()) {
             return false;
@@ -35,11 +35,11 @@ public class SumSpecification implements Specification {
 
         ArrayStatistics arrayStatistics = statistics.get();
 
-        if (arrayStatistics.getSum().isEmpty()) {
+        if (arrayStatistics.sum().isEmpty()) {
             return false;
         }
 
-        double sum = arrayStatistics.getSum().getAsDouble();
+        double sum = arrayStatistics.sum().getAsDouble();
 
         return comparator.compare(sum, expected, operator);
     }

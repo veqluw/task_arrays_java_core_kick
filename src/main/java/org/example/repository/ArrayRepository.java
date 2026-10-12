@@ -14,11 +14,7 @@ public interface ArrayRepository extends ArrayObservable {
 
     void remove(DoubleArray array);
 
-    Optional<DoubleArray> findById(long id);
-
     List<DoubleArray> find(Specification... specification);
-
-    List<DoubleArray> findAll();
 
     List<DoubleArray> sort(Comparator<DoubleArray> comparator);
 

@@ -44,20 +44,20 @@ public class WarehouseObserver implements ArrayObserver {
                 max
         );
 
-        warehouse.save(array.getId(), statistics);
+        warehouse.save(array.id(), statistics);
 
         LOGGER.debug(
                 "Warehouse updated for array id={}",
-                array.getId()
+                array.id()
         );
     }
 
     @Override
     public void delete(DoubleArray array) {
-        warehouse.remove(array.getId());
+        warehouse.remove(array.id());
         LOGGER.debug(
                 "Warehouse removed for array id={}",
-                array.getId()
+                array.id()
         );
     }
 }

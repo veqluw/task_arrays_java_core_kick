@@ -27,7 +27,7 @@ public class MinSpecification implements Specification {
     @Override
     public boolean isSatisfiedBy(DoubleArray array) {
         Optional<ArrayStatistics> statistics =
-                warehouse.findById(array.getId());
+                warehouse.findById(array.id());
 
         if (statistics.isEmpty()) {
             return false;
@@ -35,11 +35,11 @@ public class MinSpecification implements Specification {
 
         ArrayStatistics arrayStatistics = statistics.get();
 
-        if (arrayStatistics.getMin().isEmpty()) {
+        if (arrayStatistics.min().isEmpty()) {
             return false;
         }
 
-        double min = arrayStatistics.getMin().getAsDouble();
+        double min = arrayStatistics.min().getAsDouble();
 
         return comparator.compare(min, expected, operator);
     }

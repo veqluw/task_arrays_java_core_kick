@@ -16,7 +16,7 @@ public class ArrayMinMaxServiceImpl implements ArrayMinMaxService {
     public OptionalDouble findMax(DoubleArray array) {
         LOGGER.debug("Calculating max value");
 
-        double[] values = array.getValues();
+        double[] values = array.values();
 
         if (values.length == 0) {
             return OptionalDouble.empty();
@@ -39,7 +39,7 @@ public class ArrayMinMaxServiceImpl implements ArrayMinMaxService {
     public OptionalDouble findMin(DoubleArray array) {
         LOGGER.debug("Calculating min value");
 
-        double[] values = array.getValues();
+        double[] values = array.values();
 
         if (values.length == 0) {
             return OptionalDouble.empty();

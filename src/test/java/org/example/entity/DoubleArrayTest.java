@@ -15,7 +15,7 @@ class DoubleArrayTest {
         DoubleArray array = new DoubleArray(1L, values);
 
         //then
-        assertArrayEquals(values, array.getValues());
+        assertArrayEquals(values, array.values());
     }
 
     @Test
@@ -25,13 +25,13 @@ class DoubleArrayTest {
         DoubleArray array = new DoubleArray(1L, values);
 
         //when
-        double[] result = array.getValues();
+        double[] result = array.values();
         result[0] = 100.0;
 
         //then
         assertArrayEquals(
                 new double[]{1.0, 2.0, 3.0},
-                array.getValues()
+                array.values()
         );
     }
 }

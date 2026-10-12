@@ -12,8 +12,8 @@ public class ArrayFirstElementComparator
             DoubleArray first,
             DoubleArray second) {
 
-        double[] firstValues = first.getValues();
-        double[] secondValues = second.getValues();
+        double[] firstValues = first.values();
+        double[] secondValues = second.values();
 
         if (firstValues.length == 0
                 && secondValues.length == 0) {

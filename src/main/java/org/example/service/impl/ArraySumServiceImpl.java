@@ -16,7 +16,7 @@ public class ArraySumServiceImpl implements ArraySumService {
     public OptionalDouble calculateSum(DoubleArray array) {
         LOGGER.debug("Calculating sum");
 
-        double[] values = array.getValues();
+        double[] values = array.values();
 
         if (values.length == 0) {
             return OptionalDouble.empty();

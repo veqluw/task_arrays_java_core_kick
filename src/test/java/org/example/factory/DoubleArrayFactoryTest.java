@@ -25,7 +25,7 @@ public class DoubleArrayFactoryTest {
         //then
         assertArrayEquals(
                 new double[]{1.0, 2.0, 3.0},
-                result.getValues()
+                result.values()
         );
     }
 }

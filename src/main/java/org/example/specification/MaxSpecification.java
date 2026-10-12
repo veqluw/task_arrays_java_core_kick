@@ -27,7 +27,7 @@ public class MaxSpecification implements Specification {
     @Override
     public boolean isSatisfiedBy(DoubleArray array) {
         Optional<ArrayStatistics> statistics =
-                warehouse.findById(array.getId());
+                warehouse.findById(array.id());
 
         if (statistics.isEmpty()) {
             return false;
@@ -35,11 +35,11 @@ public class MaxSpecification implements Specification {
 
         ArrayStatistics arrayStatistics = statistics.get();
 
-        if (arrayStatistics.getMax().isEmpty()) {
+        if (arrayStatistics.max().isEmpty()) {
             return false;
         }
 
-        double max = arrayStatistics.getMax().getAsDouble();
+        double max = arrayStatistics.max().getAsDouble();
 
         return comparator.compare(max, expected, operator);
     }

@@ -2,21 +2,15 @@ package org.example.entity;
 
 import java.util.Arrays;
 
-public class DoubleArray {
-
-    private final long id;
-    private final double[] values;
+public record DoubleArray(long id, double[] values) {
 
     public DoubleArray(long id, double[] values) {
         this.id = id;
         this.values = values.clone();
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public double[] getValues() {
+    @Override
+    public double[] values() {
         return values.clone();
     }
 
@@ -34,9 +28,13 @@ public class DoubleArray {
 
     @Override
     public String toString() {
-        return "DoubleArray{" +
-                "id=" + id +
-                ", values=" + Arrays.toString(values) +
-                '}';
+        return new StringBuilder()
+                .append("DoubleArray{")
+                .append("\n")
+                .append("id=").append(id)
+                .append("\n")
+                .append(", values=").append(Arrays.toString(values))
+                .append('}')
+                .toString();
     }
 }

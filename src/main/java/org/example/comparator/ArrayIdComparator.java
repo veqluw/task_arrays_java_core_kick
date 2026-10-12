@@ -13,8 +13,8 @@ public class ArrayIdComparator
             DoubleArray second) {
 
         return Long.compare(
-                first.getId(),
-                second.getId()
+                first.id(),
+                second.id()
         );
     }
 }

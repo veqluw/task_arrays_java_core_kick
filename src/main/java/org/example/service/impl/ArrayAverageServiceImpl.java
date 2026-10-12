@@ -16,7 +16,7 @@ public class ArrayAverageServiceImpl implements ArrayAverageService {
     public OptionalDouble calculateAverage(DoubleArray array) {
         LOGGER.debug("Calculating average value");
 
-        double[] values = array.getValues();
+        double[] values = array.values();
 
         if (values.length == 0) {
             return OptionalDouble.empty();

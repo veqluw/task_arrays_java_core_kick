@@ -27,7 +27,7 @@ public class AverageSpecification implements Specification {
     @Override
     public boolean isSatisfiedBy(DoubleArray array) {
         Optional<ArrayStatistics> statistics =
-                warehouse.findById(array.getId());
+                warehouse.findById(array.id());
 
         if (statistics.isEmpty()) {
             return false;
@@ -35,12 +35,12 @@ public class AverageSpecification implements Specification {
 
         ArrayStatistics arrayStatistics = statistics.get();
 
-        if (arrayStatistics.getAverage().isEmpty()) {
+        if (arrayStatistics.average().isEmpty()) {
             return false;
         }
 
         double average =
-                arrayStatistics.getAverage().getAsDouble();
+                arrayStatistics.average().getAsDouble();
 
         return comparator.compare(
                 average,

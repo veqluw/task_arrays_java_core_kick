@@ -12,6 +12,6 @@ public class IdSpecification implements Specification {
 
     @Override
     public boolean isSatisfiedBy(DoubleArray array) {
-        return array.getId() == expectedId;
+        return array.id() == expectedId;
     }
 }
