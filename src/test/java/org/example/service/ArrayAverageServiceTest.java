@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.entity.DoubleArray;
+import org.example.observer.NoOpArrayObserver;
 import org.example.service.impl.ArrayAverageServiceImpl;
 import org.junit.jupiter.api.Test;
 
@@ -16,39 +17,49 @@ class ArrayAverageServiceTest {
 
     @Test
     void shouldCalculateAverage() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{2.0, 4.0, 6.0});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{2.0, 4.0, 6.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.calculateAverage(array);
 
-        //then
+        // then
         assertEquals(OptionalDouble.of(4.0), result);
     }
 
     @Test
     void shouldCalculateAverageForFractionalResult() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{1.0, 2.0});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{1.0, 2.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.calculateAverage(array);
 
-        //then
+        // then
         assertEquals(OptionalDouble.of(1.5), result);
     }
 
     @Test
     void shouldReturnEmptyForEmptyArray() {
-        //given
-        DoubleArray array = new DoubleArray(1L, new double[]{});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.calculateAverage(array);
 
-        //then
+        // then
         assertTrue(result.isEmpty());
     }
 }

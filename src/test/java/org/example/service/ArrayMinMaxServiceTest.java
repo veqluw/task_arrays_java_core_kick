@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.entity.DoubleArray;
+import org.example.observer.NoOpArrayObserver;
 import org.example.service.impl.ArrayMinMaxServiceImpl;
 import org.junit.jupiter.api.Test;
 
@@ -16,51 +17,61 @@ class ArrayMinMaxServiceTest {
 
     @Test
     void shouldFindMinimumValue() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{5.0, 2.0, 8.0, 1.0});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{5.0, 2.0, 8.0, 1.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.findMin(array);
 
-        //then
+        // then
         assertEquals(OptionalDouble.of(1.0), result);
     }
 
     @Test
     void shouldFindMaximumValue() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{5.0, 2.0, 8.0, 1.0});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{5.0, 2.0, 8.0, 1.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.findMax(array);
 
-        //then
+        // then
         assertEquals(OptionalDouble.of(8.0), result);
     }
 
     @Test
     void shouldReturnEmptyForMinimumOfEmptyArray() {
-        //given
-        DoubleArray array = new DoubleArray(1L, new double[]{});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L, new double[]{}, new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.findMin(array);
 
-        //then
+        // then
         assertTrue(result.isEmpty());
     }
 
     @Test
     void shouldReturnEmptyForMaximumOfEmptyArray() {
-        //given
-        DoubleArray array = new DoubleArray(1L, new double[]{});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L, new double[]{}, new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.findMax(array);
 
-        //then
+        // then
         assertTrue(result.isEmpty());
     }
 }

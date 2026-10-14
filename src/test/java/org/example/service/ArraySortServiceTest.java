@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.entity.DoubleArray;
+import org.example.observer.NoOpArrayObserver;
 import org.example.service.impl.ArraySortServiceImpl;
 import org.junit.jupiter.api.Test;
 
@@ -13,14 +14,17 @@ class ArraySortServiceTest {
 
     @Test
     void shouldSortArrayUsingInsertionSort() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{5.0, 1.0, 4.0, 2.0, 3.0});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{5.0, 1.0, 4.0, 2.0, 3.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         double[] result = service.insertionSort(array);
 
-        //then
+        // then
         assertArrayEquals(
                 new double[]{1.0, 2.0, 3.0, 4.0, 5.0},
                 result
@@ -29,14 +33,17 @@ class ArraySortServiceTest {
 
     @Test
     void shouldSortArrayUsingQuickSort() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{5.0, 1.0, 4.0, 2.0, 3.0});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{5.0, 1.0, 4.0, 2.0, 3.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         double[] result = service.quickSort(array);
 
-        //then
+        // then
         assertArrayEquals(
                 new double[]{1.0, 2.0, 3.0, 4.0, 5.0},
                 result
@@ -44,31 +51,34 @@ class ArraySortServiceTest {
     }
 
     @Test
-    void shouldSortAlreadySortedArrayUsingInsertion() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{1.0, 2.0, 3.0});
+    void shouldSortAlreadySortedArrayUsingInsertionSort() {
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{1.0, 2.0, 3.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         double[] result = service.insertionSort(array);
 
-        //then
-        assertArrayEquals(
-                new double[]{1.0, 2.0, 3.0},
-                result
-        );
+        // then
+        assertArrayEquals(new double[]{1.0, 2.0, 3.0}, result);
     }
 
     @Test
     void shouldSortArrayWithNegativeNumbers() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{3.0, -1.0, 2.0, -5.0});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{3.0, -1.0, 2.0, -5.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         double[] result = service.quickSort(array);
 
-        //then
+        // then
         assertArrayEquals(
                 new double[]{-5.0, -1.0, 2.0, 3.0},
                 result
@@ -77,13 +87,15 @@ class ArraySortServiceTest {
 
     @Test
     void shouldSortEmptyArray() {
-        //given
-        DoubleArray array = new DoubleArray(1L, new double[]{});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L, new double[]{}, new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         double[] result = service.insertionSort(array);
 
-        //then
+        // then
         assertArrayEquals(new double[]{}, result);
     }
 }

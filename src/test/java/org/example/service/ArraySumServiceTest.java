@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.entity.DoubleArray;
+import org.example.observer.NoOpArrayObserver;
 import org.example.service.impl.ArraySumServiceImpl;
 import org.junit.jupiter.api.Test;
 
@@ -16,39 +17,47 @@ class ArraySumServiceTest {
 
     @Test
     void shouldCalculateSum() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{1.0, 2.0, 3.0});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{1.0, 2.0, 3.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.calculateSum(array);
 
-        //then
+        // then
         assertEquals(OptionalDouble.of(6.0), result);
     }
 
     @Test
     void shouldCalculateSumForNegativeNumbers() {
-        //given
-        DoubleArray array =
-                new DoubleArray(1L, new double[]{-1.0, -2.0, -3.0});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L,
+                new double[]{-1.0, -2.0, -3.0},
+                new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.calculateSum(array);
 
-        //then
+        // then
         assertEquals(OptionalDouble.of(-6.0), result);
     }
 
     @Test
     void shouldReturnEmptyForEmptyArray() {
-        //given
-        DoubleArray array = new DoubleArray(1L, new double[]{});
+        // given
+        DoubleArray array = new DoubleArray(
+                1L, new double[]{}, new NoOpArrayObserver()
+        );
 
-        //when
+        // when
         OptionalDouble result = service.calculateSum(array);
 
-        //then
+        // then
         assertTrue(result.isEmpty());
     }
 }
