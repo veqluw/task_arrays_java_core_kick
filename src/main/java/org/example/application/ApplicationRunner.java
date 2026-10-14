@@ -6,7 +6,6 @@
     import org.example.entity.DoubleArray;
     import org.example.factory.ArrayFactory;
     import org.example.factory.DoubleArrayFactory;
-    import org.example.observer.WarehouseObserver;
     import org.example.parser.ArrayParser;
     import org.example.reader.ArrayFileReader;
     import org.example.repository.ArrayRepository;
@@ -59,12 +58,7 @@
     
             Warehouse warehouse =
                     Warehouse.getInstance();
-    
-            WarehouseObserver observer =
-                    new WarehouseObserver(warehouse);
-    
-            repository.addObserver(observer);
-    
+
             loadArrays(
                     reader,
                     validator,
