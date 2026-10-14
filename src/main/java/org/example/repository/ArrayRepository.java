@@ -1,14 +1,12 @@
 package org.example.repository;
 
 import org.example.entity.DoubleArray;
-import org.example.observer.ArrayObservable;
 import org.example.specification.Specification;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
-public interface ArrayRepository extends ArrayObservable {
+public interface ArrayRepository {
 
     void add(DoubleArray array);
 

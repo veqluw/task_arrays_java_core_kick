@@ -3,13 +3,13 @@ package org.example.repository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.entity.DoubleArray;
-import org.example.observer.ArrayObserver;
 import org.example.specification.Specification;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class ArrayRepositoryImpl implements ArrayRepository {
 
@@ -18,11 +18,9 @@ public class ArrayRepositoryImpl implements ArrayRepository {
     private static ArrayRepositoryImpl instance;
 
     private final List<DoubleArray> arrays;
-    private final List<ArrayObserver> observers;
 
     private ArrayRepositoryImpl() {
         arrays = new ArrayList<>();
-        observers = new ArrayList<>();
     }
 
     public static ArrayRepositoryImpl getInstance() {
@@ -42,7 +40,7 @@ public class ArrayRepositoryImpl implements ArrayRepository {
                 array.id()
         );
 
-        notifyObserversUpdate(array);
+        array.notifyUpdate();
     }
 
     @Override
@@ -54,6 +52,7 @@ public class ArrayRepositoryImpl implements ArrayRepository {
                     "Array removed: id={}",
                     array.id()
             );
+            array.notifyDelete();
         }
     }
 
@@ -77,37 +76,39 @@ public class ArrayRepositoryImpl implements ArrayRepository {
                 value
         );
 
-        notifyObserversUpdate(array);
+        array.notifyUpdate();
     }
 
     @Override
     public void deleteById(long id) {
         Optional<DoubleArray> result = findById(id);
 
-        if(isNotExists(result, id)) return;
+        if (isNotExists(result, id)) {
+            return;
+        }
 
-        if (result.isPresent()) {
-            arrays.remove(result.get());
-            notifyObserversDelete(result.get());
+        DoubleArray array = result.get();
+        boolean removed = arrays.remove(array);
+
+        if (removed) {
+            array.notifyDelete();
+
+            LOGGER.info("Array removed: id={}", id);
         }
     }
 
     @Override
     public List<DoubleArray> find(
             Specification... specifications) {
-        if (specifications.length == 0) {
-            return arrays.stream().toList();
+
+        Predicate<DoubleArray> predicate = array -> true;
+
+        for (Specification specification : specifications) {
+            predicate = predicate.and(specification::isSatisfiedBy);
         }
 
         return arrays.stream()
-                .filter(doubleArray -> {
-                    boolean isSatisfied = true;
-                    for (Specification specification : specifications) {
-                        isSatisfied = specification.isSatisfiedBy(doubleArray);
-                        if (!isSatisfied) return isSatisfied;
-                    }
-                    return isSatisfied;
-                })
+                .filter(predicate)
                 .toList();
     }
 
@@ -121,30 +122,6 @@ public class ArrayRepositoryImpl implements ArrayRepository {
         result.sort(comparator);
 
         return result;
-    }
-
-    @Override
-    public void addObserver(ArrayObserver observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(ArrayObserver observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObserversUpdate(DoubleArray array) {
-        for (ArrayObserver observer : observers) {
-            observer.update(array);
-        }
-    }
-
-    @Override
-    public void notifyObserversDelete(DoubleArray array) {
-        for (ArrayObserver observer : observers) {
-            observer.delete(array);
-        }
     }
 
     private Optional<DoubleArray> findById(long id) {
