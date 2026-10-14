@@ -3,7 +3,9 @@ package org.example.factory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.entity.DoubleArray;
+import org.example.observer.WarehouseObserver;
 import org.example.parser.ArrayParser;
+import org.example.warehouse.Warehouse;
 
 public class DoubleArrayFactory implements ArrayFactory {
 
@@ -25,6 +27,6 @@ public class DoubleArrayFactory implements ArrayFactory {
 
         double[] values = parser.parse(data);
 
-        return new DoubleArray(id, values);
+        return new DoubleArray(id, values, new WarehouseObserver(Warehouse.getInstance()));
     }
 }

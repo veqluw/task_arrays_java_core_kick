@@ -1,14 +1,8 @@
 package org.example.observer;
 
-import org.example.entity.DoubleArray;
-
 public interface ArrayObservable {
 
-    void addObserver(ArrayObserver observer);
+    void notifyUpdate();
 
-    void removeObserver(ArrayObserver observer);
-
-    void notifyObserversUpdate(DoubleArray array);
-
-    void notifyObserversDelete(DoubleArray array);
+    void notifyDelete();
 }
