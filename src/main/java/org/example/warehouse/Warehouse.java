@@ -24,7 +24,7 @@ public class Warehouse {
         return instance;
     }
 
-    public void save(long arrayId, ArrayStatistics arrayStatistics) {
+    public void put(long arrayId, ArrayStatistics arrayStatistics) {
         statistics.put(arrayId, arrayStatistics);
     }
 

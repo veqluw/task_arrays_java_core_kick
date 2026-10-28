@@ -44,7 +44,7 @@ public class WarehouseObserver implements ArrayObserver {
                 max
         );
 
-        warehouse.save(array.id(), statistics);
+        warehouse.put(array.id(), statistics);
 
         LOGGER.debug(
                 "Warehouse updated for array id={}",
